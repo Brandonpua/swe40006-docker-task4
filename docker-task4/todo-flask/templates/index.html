@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Docker To-Do App</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 500px; margin: 40px auto; }
+    .done { text-decoration: line-through; color: gray; }
+    li { margin: 8px 0; }
+    form.inline { display: inline; }
+  </style>
+</head>
+<body>
+  <h1>Docker To-Do List</h1>
+  <p>SWE40006 Task 4.3 - Flask web app</p>
+  <form action="/add" method="post">
+    <input type="text" name="title" placeholder="New task" required>
+    <button type="submit">Add</button>
+  </form>
+  <ul>
+    {% for task in tasks %}
+    <li>
+      <span class="{{ 'done' if task.done else '' }}">{{ task.title }}</span>
+      <form class="inline" action="/toggle/{{ loop.index0 }}" method="post"><button>Done/Undo</button></form>
+      <form class="inline" action="/delete/{{ loop.index0 }}" method="post"><button>Delete</button></form>
+    </li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
